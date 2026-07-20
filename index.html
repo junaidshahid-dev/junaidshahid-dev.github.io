@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M. Junaid Shahid — Python Backend &amp; AI-Tooling Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{ --bg:#020617; --card:#0E1223; --line:rgba(255,255,255,.08); --fg:#F8FAFC;
+    --muted:#94A3B8; --accent:#5E6AD2; --accent2:#22D3EE; --pos:#22C55E; --neg:#EF4444; --gold:#FFD600;
+    --display:"Space Grotesk","Segoe UI",system-ui,-apple-system,sans-serif;
+    --body:"Inter","Segoe UI",system-ui,-apple-system,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,"Cascadia Code",Consolas,monospace; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--fg);font-family:var(--body);line-height:1.65;font-size:15px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 24px 80px}
+  h1,h2,h3{font-family:var(--display);letter-spacing:-.01em}
+  .mono{font-family:var(--mono)}
+  .glass{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
+    border:1px solid var(--line);border-radius:16px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 20px 40px -20px rgba(0,0,0,.6)}
+  /* hero */
+  .hero{padding:64px 0 40px;border-bottom:1px solid var(--line)}
+  .tag{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:3px;text-transform:uppercase}
+  h1{font-size:38px;font-weight:700;margin:12px 0 6px;line-height:1.15}
+  .role{font-size:19px;color:var(--accent);font-weight:600;margin-bottom:12px}
+  .sub{color:var(--muted);max-width:660px;font-size:16px}
+  .chips{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+  .chip{font-family:var(--mono);font-size:11px;padding:5px 12px;border-radius:999px;
+    border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--muted)}
+  .chip.a{color:var(--accent);border-color:rgba(94,106,210,.4)}
+  .chip.c{color:var(--accent2);border-color:rgba(34,211,238,.35)}
+  .chip.g{color:var(--pos);border-color:rgba(34,197,94,.3)}
+  section{padding:36px 0}
+  h2{font-size:22px;margin-bottom:4px}
+  .lead{color:var(--muted);margin-bottom:20px}
+  /* featured */
+  .feature{padding:26px 28px;margin-bottom:14px}
+  .feature .kicker{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent2)}
+  .feature h3{font-size:19px;margin:6px 0 8px}
+  .feature p{color:var(--muted);margin-bottom:14px}
+  .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+  .metric{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
+  .metric .v{font-family:var(--mono);font-size:18px;font-weight:700;color:var(--accent)}
+  .metric .l{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+  ul.feats{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px 18px}
+  ul.feats li{color:var(--fg);font-size:14px;padding-left:18px;position:relative}
+  ul.feats li::before{content:"▸";color:var(--pos);position:absolute;left:0}
+  /* mcp flow diagram */
+  .flow{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap;margin:16px 0 6px}
+  .node{flex:1;min-width:130px;background:#0a0e1f;border:1px solid var(--line);border-radius:12px;padding:14px 12px;text-align:center}
+  .node.hl{border-color:rgba(34,211,238,.4);background:linear-gradient(180deg,rgba(34,211,238,.08),rgba(34,211,238,.02))}
+  .node .t{font-family:var(--display);font-weight:600;font-size:14px}
+  .node.hl .t{color:var(--accent2)}
+  .node .s{font-size:11px;color:var(--muted);margin-top:3px}
+  .arrow{display:flex;align-items:center;color:var(--accent2);font-size:20px;font-weight:700}
+  .note{font-size:11px;color:var(--muted);margin-top:8px;font-style:italic}
+  /* mini dashboard mock */
+  .mock{background:#0a0a14;border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:16px}
+  .mock-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+  .mock-title{font-family:var(--display);font-weight:700;font-size:13px}
+  .mock-title span{color:var(--accent)}
+  .dot{display:inline-block;width:7px;height:7px;border-radius:99px;background:var(--pos);margin-right:5px}
+  .mock-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+  .mk{background:#0E1223;border:1px solid var(--line);border-radius:9px;padding:8px 10px}
+  .mk .l{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+  .mk .v{font-family:var(--mono);font-size:14px;font-weight:700}
+  .row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;
+    padding:5px 8px;border-top:1px solid rgba(255,255,255,.05);color:var(--muted)}
+  .row b{color:var(--fg);font-weight:600}
+  .pos{color:var(--pos)} .neg{color:var(--neg)}
+  /* code mock */
+  .code{background:#0a0a14;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-top:14px;
+    font-family:var(--mono);font-size:12px;line-height:1.7;overflow-x:auto}
+  .code .c1{color:#7dd3fc}.code .c2{color:#c4b5fd}.code .c3{color:var(--muted)}.code .c4{color:var(--pos)}
+  /* project grid */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .proj{padding:22px 24px}
+  .proj h3{font-size:16px;margin-bottom:8px}
+  .proj p{color:var(--muted);font-size:13.5px;margin-bottom:12px}
+  .stack{display:flex;gap:6px;flex-wrap:wrap}
+  .stack span{font-family:var(--mono);font-size:10px;padding:3px 9px;border-radius:999px;
+    background:rgba(94,106,210,.12);color:#aab2f0;border:1px solid rgba(94,106,210,.25)}
+  /* services */
+  .svc{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .svc .glass{padding:20px 22px}
+  .svc h3{font-size:15px;margin-bottom:6px;color:var(--accent)}
+  .svc p{color:var(--muted);font-size:13.5px}
+  /* principles */
+  .princ{padding:20px 24px;border-left:3px solid var(--pos);margin-bottom:10px;color:var(--muted);font-size:14px}
+  .princ b{color:var(--fg)}
+  footer{border-top:1px solid var(--line);padding:28px 0;text-align:center;color:var(--muted);font-size:13px}
+  @media(max-width:760px){.grid,.svc,.metrics{grid-template-columns:1fr}ul.feats{grid-template-columns:1fr}
+    .arrow{transform:rotate(90deg);justify-content:center}.node{min-width:100%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ======================= HERO ======================= -->
+<div class="hero">
+  <div class="tag">// PORTFOLIO</div>
+  <h1>M. Junaid Shahid</h1>
+  <div class="role">Python Backend &amp; AI-Tooling Developer</div>
+  <p class="sub">Computer Science graduate (FAST–NUCES) who builds production-grade Python systems
+  end to end — MCP servers for AI agents, REST API backends, real-time dashboards, and automation.
+  Strong on correctness: automated testing, fault-tolerant design, and rigorous statistical validation.</p>
+  <div class="chips">
+    <span class="chip c">FastMCP / MCP</span><span class="chip a">Python</span>
+    <span class="chip a">Docker</span><span class="chip a">Flask / REST APIs</span>
+    <span class="chip a">pandas / NumPy</span><span class="chip a">Web Scraping</span>
+    <span class="chip a">MetaTrader 5</span><span class="chip g">Available for projects</span>
+    <span class="chip">junaidshahid725@gmail.com</span>
+  </div>
+</div>
+
+<!-- ======================= FEATURED ======================= -->
+<section>
+  <h2>Featured Work</h2>
+  <p class="lead">Two production systems, built solo and end to end — one for AI agents, one for live markets.</p>
+
+  <!-- MCP SERVER -->
+  <div class="glass feature">
+    <div class="kicker">AI Tooling</div>
+    <h3>MCP Server for AI Agents</h3>
+    <p>A Model Context Protocol server that exposes a real toolkit — backtests, live reports,
+    hypothesis search — as <b>typed tools an LLM can call directly</b>. Built with FastMCP,
+    tested against an in-memory MCP client, and shipped as a slim Docker image. This is the
+    infrastructure that lets an AI agent like Claude actually <i>do</i> things in your systems,
+    safely and predictably.</p>
+
+    <div class="flow">
+      <div class="node"><div class="t">Your data &amp; tools</div><div class="s">APIs · databases · scripts</div></div>
+      <div class="arrow">→</div>
+      <div class="node hl"><div class="t">MCP Server</div><div class="s">FastMCP · Docker · HTTP</div></div>
+      <div class="arrow">→</div>
+      <div class="node"><div class="t">AI agent</div><div class="s">Claude / any LLM</div></div>
+    </div>
+    <div class="note">Typed, validated tools — the agent calls them like functions instead of guessing.</div>
+
+    <div class="code" aria-hidden="true">
+      <span class="c3"># exposed as a typed tool the agent can call</span><br>
+      <span class="c1">@mcp.tool</span>()<br>
+      <span class="c2">def</span> run_backtest(strategy: <span class="c1">str</span>, market: <span class="c1">str</span>) -&gt; <span class="c1">Report</span>:<br>
+      &nbsp;&nbsp;<span class="c3">"""Walk-forward backtest with cost modeling."""</span><br>
+      &nbsp;&nbsp;<span class="c2">return</span> engine.evaluate(strategy, market)  <span class="c4"># ✓ validated</span>
+    </div>
+
+    <div class="stack" style="margin-top:14px">
+      <span>Python</span><span>FastMCP</span><span>Model Context Protocol</span>
+      <span>Docker</span><span>typed tools</span><span>in-memory testing</span>
+    </div>
+  </div>
+
+  <!-- APEX -->
+  <div class="glass feature">
+    <div class="kicker">Backend Systems</div>
+    <h3>APEX — Algorithmic Trading Platform</h3>
+    <p>A full production trading stack running live on a brokerage account (MetaTrader 5):
+    systematic strategy across 10+ markets with a Flask REST control center, an installable
+    mobile PWA, institutional-style risk management, and full observability. Every component
+    validated by backtests over 6 years of data before a single live order.</p>
+    <div class="metrics">
+      <div class="metric"><div class="v">10+</div><div class="l">markets live</div></div>
+      <div class="metric"><div class="v">6 yrs</div><div class="l">backtest data</div></div>
+      <div class="metric"><div class="v">5</div><div class="l">risk layers</div></div>
+      <div class="metric"><div class="v">PWA</div><div class="l">mobile control</div></div>
+    </div>
+    <ul class="feats">
+      <li>Live order execution with server-side stop-losses</li>
+      <li>Volatility-based position sizing per market</li>
+      <li>Flask REST API control center + PIN-auth PWA</li>
+      <li>Deposit/withdrawal-aware circuit breaker</li>
+      <li>Crash recovery that re-adopts open positions</li>
+      <li>Walk-forward backtesting engine, cost-modeled</li>
+      <li>Stale-feed detection + session/holiday calendars</li>
+      <li>SQLite decision log + full trade journaling</li>
+    </ul>
+    <div class="stack" style="margin-top:14px">
+      <span>Python</span><span>Flask / REST</span><span>MetaTrader5 API</span>
+      <span>pandas / NumPy</span><span>SQLite</span><span>PWA</span><span>Telegram API</span>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PROJECTS ======================= -->
+<section>
+  <h2>More Work</h2>
+  <p class="lead">Each of these is a working system, not a tutorial exercise.</p>
+  <div class="grid">
+
+    <div class="glass proj">
+      <h3>🔌 Python Backend &amp; REST APIs</h3>
+      <p>Flask REST services with clean, documented endpoints — auth, live state streaming, and
+      control actions. I build the server layer other apps and dashboards talk to, including an
+      installable <b>PWA</b> that runs on a phone and streams account state in real time.</p>
+      <div class="stack"><span>Python</span><span>Flask</span><span>REST API design</span><span>SQLite</span><span>PWA</span></div>
+    </div>
+
+    <div class="glass proj">
+      <h3>🕸️ Web Scraping &amp; Automation</h3>
+      <p>Repetitive computer work turned into reliable Python: scrapers that collect data into
+      clean spreadsheets, scheduled jobs, report generators, and Telegram bots that alert you the
+      moment something happens — with logging so you always see what ran.</p>
+      <div class="stack"><span>Python</span><span>web scraping</span><span>Telegram Bot API</span><span>scheduling</span><span>Bash</span></div>
+    </div>
+
+    <div class="glass proj">
+      <h3>🧠 Hydra — Falsification-First Research Engine</h3>
+      <p>A quant research pipeline whose job is to <b>prove ideas wrong before they cost money</b>:
+      35+ hypotheses tested under frozen pre-registered specs, holdout + bootstrap validation, and
+      documented verdicts — including catching a lookahead bug that had inflated a result to
+      <b>96% false confidence</b>. Rejection is the product.</p>
+      <div class="stack"><span>Python</span><span>pandas / NumPy</span><span>bootstrap / Monte Carlo</span><span>holdout validation</span></div>
+    </div>
+
+    <div class="glass proj">
+      <h3>📊 Real-Time Trading Dashboard</h3>
+      <p>Live web dashboard connected directly to MT5: equity, floating P&amp;L, every open
+      position, drawdown, risk exposure, circuit-breaker status — auto-refreshing, with
+      confirmed-action controls. Dark fintech UI.</p>
+      <div class="mock">
+        <div class="mock-head">
+          <div class="mock-title">APEX <span>·</span> Control Center</div>
+          <div class="mono" style="font-size:10px;color:var(--muted)"><span class="dot"></span>live</div>
+        </div>
+        <div class="mock-kpis">
+          <div class="mk"><div class="l">Equity</div><div class="v">$30,041</div></div>
+          <div class="mk"><div class="l">Float P/L</div><div class="v pos">+$37.09</div></div>
+          <div class="mk"><div class="l">Drawdown</div><div class="v">-0.14%</div></div>
+          <div class="mk"><div class="l">Breaker</div><div class="v pos">OK</div></div>
+        </div>
+        <div class="row"><span><b>USTEC</b> LONG</span><span class="pos">+66.93</span></div>
+        <div class="row"><span><b>USOIL</b> LONG</span><span class="pos">+33.06</span></div>
+        <div class="row"><span><b>XAUUSD</b> SHORT</span><span class="pos">+18.21</span></div>
+        <div class="note">Interface preview — figures from the live demo deployment.</div>
+      </div>
+      <div class="stack" style="margin-top:12px"><span>Flask</span><span>REST API</span><span>JavaScript</span><span>MT5</span></div>
+    </div>
+
+    <div class="glass proj">
+      <h3>⚙️ MT5 Live Execution Engine</h3>
+      <p>The hands of the trading system: reconciles target vs. actual positions across markets,
+      places orders with attached stop-losses, respects per-market and per-class risk caps,
+      handles hedging-mode accounts safely, and refuses unsafe states. Idempotent — safe to
+      re-run anytime.</p>
+      <div class="stack"><span>Python</span><span>MetaTrader5</span><span>risk management</span><span>fault tolerance</span></div>
+    </div>
+
+    <div class="glass proj">
+      <h3>🐳 Dockerized &amp; Documented</h3>
+      <p>I ship code the way production expects it: slim multi-stage <b>Docker</b> images with
+      layer caching, environment-based config, read-only data volumes, Git version control, and
+      a short written spec for every job before a line of code is written.</p>
+      <div class="stack"><span>Docker</span><span>Git</span><span>Linux / Bash</span><span>env config</span><span>docs</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ======================= SERVICES ======================= -->
+<section>
+  <h2>What I Can Build For You</h2>
+  <p class="lead">Typical engagements — fixed quotes, clear scope, source code included.</p>
+  <div class="svc">
+    <div class="glass"><h3>MCP Servers &amp; AI Agent Tools</h3><p>Connect your data, APIs, and
+      scripts to AI agents like Claude as typed, safe tools — FastMCP, tested, Dockerized.</p></div>
+    <div class="glass"><h3>Python Backend &amp; APIs</h3><p>Flask REST APIs, dashboards, and the
+      server layer your app or automation needs — clean, documented, and tested.</p></div>
+    <div class="glass"><h3>Automation &amp; Web Scraping</h3><p>Scrapers, data pipelines, scheduled
+      jobs, and Telegram bots that do the repetitive work for you, with logs you can trust.</p></div>
+    <div class="glass"><h3>Trading Bots &amp; Dashboards</h3><p>Your strategy turned into a
+      disciplined MT5 bot with real risk controls, plus real-time dashboards — demo-tested first.</p></div>
+  </div>
+</section>
+
+<!-- ======================= PRINCIPLES ======================= -->
+<section>
+  <h2>How I Work</h2>
+  <div class="glass princ"><b>Honesty first.</b> I'll tell you plainly if something you're asking
+  for won't do what you hope — my own validation tooling once caught a bug inflating a result to
+  96% false confidence before it did any damage. You'd be surprised how rare that is, and how much
+  it saves clients.</div>
+  <div class="glass princ"><b>Correctness by default.</b> Automated tests, fault-tolerant design,
+  stops and safety guards where money or data is on the line, full logs everywhere. Code that
+  matters gets engineered like it matters.</div>
+  <div class="glass princ"><b>Clear process.</b> A short written spec → build → test against the
+  spec → documented handover with source code. Questions before code, not apologies after.</div>
+</section>
+
+<footer>
+  M. Junaid Shahid · Python Backend &amp; AI-Tooling Developer · junaidshahid725@gmail.com<br>
+  <span class="mono" style="font-size:11px">Fiverr: @junaidshahid469 · FAST–NUCES, Computer Science</span>
+</footer>
+
+</div>
+</body>
+</html>
