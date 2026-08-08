@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:title" content="Junaid Shahid — Python Backend & AI-Tooling Developer">
-<meta property="og:description" content="MCP servers for AI agents, Flask REST backends, real-time dashboards, and a falsification-first quant research platform — built end to end in Python.">
+<meta property="og:description" content="MCP servers and auditing tools for AI agents, FastAPI/Flask backends, and full-stack web — built end to end. Author of the survey finding ~43% of Python MCP servers fail a clean install.">
 <meta property="og:image" content="https://junaidshahid-dev.github.io/og.png">
 <meta property="og:url" content="https://junaidshahid-dev.github.io">
 <meta property="og:type" content="website">
@@ -108,14 +108,16 @@
   <div class="tag">// PORTFOLIO</div>
   <h1>M. Junaid Shahid</h1>
   <div class="role">Python Backend &amp; AI-Tooling Developer</div>
-  <p class="sub">Computer Science graduate (FAST–NUCES) who builds production-grade Python systems
-  end to end — MCP servers for AI agents, REST API backends, real-time dashboards, and automation.
-  Strong on correctness: automated testing, fault-tolerant design, and rigorous statistical validation.</p>
+  <p class="sub">Computer Science graduate (FAST–NUCES) who builds production Python systems end to end —
+  MCP servers for AI agents, FastAPI/Flask backends, full-stack web — and who is unusually careful
+  about whether a result is true. I published a reproducible survey finding that ~43% of Python MCP
+  servers on PyPI don't start on a clean install, and I retract my own results when they turn out
+  to be wrong.</p>
   <div class="chips">
     <span class="chip c">FastMCP / MCP</span><span class="chip a">Python</span>
     <span class="chip a">Docker</span><span class="chip a">Flask / REST APIs</span>
-    <span class="chip a">pandas / NumPy</span><span class="chip a">Web Scraping</span>
-    <span class="chip a">MetaTrader 5</span><span class="chip g">Available for projects</span>
+    <span class="chip a">pandas / NumPy</span><span class="chip a">statistical validation</span>
+    <span class="chip a">TypeScript / Next.js</span><span class="chip g">Available for projects</span>
     <span class="chip">junaidshahid725@gmail.com</span>
   </div>
 </div>
@@ -123,7 +125,47 @@
 <!-- ======================= FEATURED ======================= -->
 <section>
   <h2>Featured Work</h2>
-  <p class="lead">Two production systems, built solo and end to end — one for AI agents, one for live markets.</p>
+  <p class="lead">Built solo and end to end. Every number below is measured and reproducible.</p>
+
+  <!-- MCP-PROBE -->
+  <div class="glass feature">
+    <div class="kicker">Open Source · AI Tooling</div>
+    <h3>mcp-probe — auditing the tools AI agents call</h3>
+    <p>Everyone is shipping MCP servers. Almost nobody is testing them. mcp-probe connects to any
+    server, discovers its tools, generates <b>adversarial calls from each tool's own schema</b> —
+    wrong types, missing fields, 100,000-character strings, injection-shaped payloads — and scores
+    how it holds up. I used it to audit 13 public servers including Anthropic's, Google's,
+    Microsoft's and MongoDB's, and privately disclosed real input-validation gaps in two.</p>
+
+    <div class="metrics">
+      <div class="metric"><div class="v">~43%</div><div class="l">of Python MCP servers fail a clean install</div></div>
+      <div class="metric"><div class="v">300</div><div class="l">packages, seeded random sample</div></div>
+      <div class="metric"><div class="v">13</div><div class="l">public servers audited</div></div>
+      <div class="metric"><div class="v">5</div><div class="l">false positives found in my own tool</div></div>
+    </div>
+
+    <p>Then I measured the ecosystem properly. PyPI carries ~18,000 packages with "mcp" in the
+    name, so I drew a <b>seeded random sample</b> of 300 rather than hand-picking, and reported the
+    rate with Wilson confidence intervals. Metadata alone said 86% were exposed — but metadata is
+    not evidence, so I installed a random subsample into <b>fresh virtualenvs and ran them</b>.
+    That second stage cleared three packages that looked broken and start fine. Publishing the
+    first number would have been confidently wrong about three maintainers.</p>
+
+    <div class="code" aria-hidden="true">
+      <span class="c3"># the failure, on a clean machine — three signatures, one cause</span><br>
+      <span class="c4">ModuleNotFoundError:</span> No module named <span class="c1">'mcp.server.fastmcp'</span><br>
+      <span class="c4">ImportError:</span> cannot import name <span class="c1">'McpError'</span><br>
+      <span class="c4">AttributeError:</span> <span class="c1">'Server'</span> object has no attribute <span class="c1">'list_tools'</span><br>
+      <span class="c3"># the SDK shipped 2.0 and removed all three. Fix: mcp&gt;=1.0.0,&lt;2</span>
+    </div>
+    <div class="note">Invisible to maintainers — their machine has a cached SDK, so pip never
+    upgrades. It only breaks for new users, who hit an import error and don't come back.</div>
+
+    <div class="stack" style="margin-top:14px">
+      <span>Python</span><span>schema-driven fuzzing</span><span>seeded sampling</span>
+      <span>Wilson intervals</span><span>open source</span>
+    </div>
+  </div>
 
   <!-- MCP SERVER -->
   <div class="glass feature">
@@ -158,33 +200,27 @@
     </div>
   </div>
 
-  <!-- APEX -->
+  <!-- E-COMMERCE -->
   <div class="glass feature">
-    <div class="kicker">Backend Systems</div>
-    <h3>APEX — Algorithmic Trading Platform</h3>
-    <p>A full production trading stack running live on a brokerage account (MetaTrader 5):
-    systematic strategy across 10+ markets with a Flask REST control center, an installable
-    mobile PWA, institutional-style risk management, and full observability. Every component
-    validated by backtests over 6 years of data before a single live order.</p>
-    <div class="metrics">
-      <div class="metric"><div class="v">10+</div><div class="l">markets live</div></div>
-      <div class="metric"><div class="v">6 yrs</div><div class="l">backtest data</div></div>
-      <div class="metric"><div class="v">5</div><div class="l">risk layers</div></div>
-      <div class="metric"><div class="v">PWA</div><div class="l">mobile control</div></div>
-    </div>
+    <div class="kicker">Full-Stack · Production</div>
+    <h3>3D E-Commerce Platform</h3>
+    <p>A complete storefront and back office, built solo: cinematic <b>3D product views</b> on a
+    real relational database, with everything a shop actually needs behind it — secure sessions,
+    live per-variant stock, coupons, courier-ready fulfilment, transactional email, and a full
+    admin console. Not a template with a cart bolted on.</p>
     <ul class="feats">
-      <li>Live order execution with server-side stop-losses</li>
-      <li>Volatility-based position sizing per market</li>
-      <li>Flask REST API control center + PIN-auth PWA</li>
-      <li>Deposit/withdrawal-aware circuit breaker</li>
-      <li>Crash recovery that re-adopts open positions</li>
-      <li>Walk-forward backtesting engine, cost-modeled</li>
-      <li>Stale-feed detection + session/holiday calendars</li>
-      <li>SQLite decision log + full trade journaling</li>
+      <li>3D storefront — React Three Fiber + Framer Motion</li>
+      <li>Session auth: bcrypt, JOSE tokens, TOTP two-factor</li>
+      <li>Prisma schema + migrations over a real relational DB</li>
+      <li>Live per-variant inventory, decremented on order</li>
+      <li>Coupons, shipping rules, order history</li>
+      <li>Regional payments incl. cash-on-delivery + wallets</li>
+      <li>Admin console: products, stock, orders, fulfilment</li>
+      <li>Nodemailer transactional email on every state change</li>
     </ul>
     <div class="stack" style="margin-top:14px">
-      <span>Python</span><span>Flask / REST</span><span>MetaTrader5 API</span>
-      <span>pandas / NumPy</span><span>SQLite</span><span>PWA</span><span>Telegram API</span>
+      <span>Next.js 16</span><span>React 19</span><span>TypeScript</span>
+      <span>Prisma 7</span><span>React Three Fiber</span><span>Tailwind 4</span>
     </div>
   </div>
 </section>
@@ -221,36 +257,29 @@
     </div>
 
     <div class="glass proj">
-      <h3>📊 Real-Time Trading Dashboard</h3>
-      <p>Live web dashboard connected directly to MT5: equity, floating P&amp;L, every open
-      position, drawdown, risk exposure, circuit-breaker status — auto-refreshing, with
-      confirmed-action controls. Dark fintech UI.</p>
-      <div class="mock">
-        <div class="mock-head">
-          <div class="mock-title">APEX <span>·</span> Control Center</div>
-          <div class="mono" style="font-size:10px;color:var(--muted)"><span class="dot"></span>live</div>
-        </div>
-        <div class="mock-kpis">
-          <div class="mk"><div class="l">Equity</div><div class="v">$30,041</div></div>
-          <div class="mk"><div class="l">Float P/L</div><div class="v pos">+$37.09</div></div>
-          <div class="mk"><div class="l">Drawdown</div><div class="v">-0.14%</div></div>
-          <div class="mk"><div class="l">Breaker</div><div class="v pos">OK</div></div>
-        </div>
-        <div class="row"><span><b>USTEC</b> LONG</span><span class="pos">+66.93</span></div>
-        <div class="row"><span><b>USOIL</b> LONG</span><span class="pos">+33.06</span></div>
-        <div class="row"><span><b>XAUUSD</b> SHORT</span><span class="pos">+18.21</span></div>
-        <div class="note">Interface preview — figures from the live demo deployment.</div>
-      </div>
-      <div class="stack" style="margin-top:12px"><span>Flask</span><span>REST API</span><span>JavaScript</span><span>MT5</span></div>
+      <h3>📉 pageweight — website performance auditor</h3>
+      <p>Measures what is actually wrong with a site: real transfer size asset by asset, mobile
+      load cost, compression, HTTPS, viewport, render-blocking scripts. Every report ends with
+      <b>how each number was produced</b> and states its own limits — JavaScript is never executed,
+      so true weight is higher than reported, never lower. Obeys robots.txt; it is not a scanner.</p>
+      <div class="stack"><span>Python</span><span>open source</span><span>no dependencies</span><span>honest limits</span></div>
     </div>
 
     <div class="glass proj">
-      <h3>⚙️ MT5 Live Execution Engine</h3>
-      <p>The hands of the trading system: reconciles target vs. actual positions across markets,
-      places orders with attached stop-losses, respects per-market and per-class risk caps,
-      handles hedging-mode accounts safely, and refuses unsafe states. Idempotent — safe to
-      re-run anytime.</p>
-      <div class="stack"><span>Python</span><span>MetaTrader5</span><span>risk management</span><span>fault tolerance</span></div>
+      <h3>📚 ragbox — document Q&amp;A with citations</h3>
+      <p>Ask questions of your own PDFs and get answers that <b>cite the exact source</b>, so
+      nothing is invented. Pluggable retrieval — keyword or semantic — a FastAPI backend with
+      interactive docs, multi-tenant isolation enforced by tests, and Docker deployment.</p>
+      <div class="stack"><span>Python</span><span>FastAPI</span><span>RAG</span><span>Docker</span><span>pytest</span></div>
+    </div>
+
+    <div class="glass proj">
+      <h3>📈 APEX — algorithmic trading research platform</h3>
+      <p>A live execution engine with broker-side stops, volatility sizing, a drawdown circuit
+      breaker, crash recovery and stale-feed detection — plus a Flask control centre and an
+      installable PWA. Built to a standard where <b>money is on the line</b>, which is a useful
+      way to learn fault tolerance.</p>
+      <div class="stack"><span>Python</span><span>Flask / REST</span><span>MetaTrader5 API</span><span>pandas</span><span>SQLite</span><span>PWA</span></div>
     </div>
 
     <div class="glass proj">
@@ -275,8 +304,8 @@
       server layer your app or automation needs — clean, documented, and tested.</p></div>
     <div class="glass"><h3>Automation &amp; Web Scraping</h3><p>Scrapers, data pipelines, scheduled
       jobs, and Telegram bots that do the repetitive work for you, with logs you can trust.</p></div>
-    <div class="glass"><h3>Trading Bots &amp; Dashboards</h3><p>Your strategy turned into a
-      disciplined MT5 bot with real risk controls, plus real-time dashboards — demo-tested first.</p></div>
+    <div class="glass"><h3>MCP Server Audits</h3><p>I connect to your server, fuzz every tool from its
+      own schema, and send a report showing exactly which input broke what — and which tools passed.</p></div>
   </div>
 </section>
 
@@ -284,9 +313,10 @@
 <section>
   <h2>How I Work</h2>
   <div class="glass princ"><b>Honesty first.</b> I'll tell you plainly if something you're asking
-  for won't do what you hope — my own validation tooling once caught a bug inflating a result to
-  96% false confidence before it did any damage. You'd be surprised how rare that is, and how much
-  it saves clients.</div>
+  for won't do what you hope. My best research result showed +0.17R per trade across 4,917 trades
+  and passed permutation controls, a holdout split and tick-level validation — and I retracted it,
+  publicly, once I found the bug in my own backtest that produced it. I'd rather hand you a smaller
+  true number than a large one that falls apart later.</div>
   <div class="glass princ"><b>Correctness by default.</b> Automated tests, fault-tolerant design,
   stops and safety guards where money or data is on the line, full logs everywhere. Code that
   matters gets engineered like it matters.</div>
@@ -296,7 +326,7 @@
 
 <footer>
   M. Junaid Shahid · Python Backend &amp; AI-Tooling Developer · junaidshahid725@gmail.com<br>
-  <span class="mono" style="font-size:11px">Fiverr: @junaidshahid469 · FAST–NUCES, Computer Science</span>
+  <span class="mono" style="font-size:11px">github.com/junaidshahid-dev · FAST–NUCES, Computer Science · Lahore, Pakistan</span>
 </footer>
 
 </div>
